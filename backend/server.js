@@ -8,10 +8,10 @@ const PORT = 3001;
 app.use(cors());
 app.use(express.json());
 
-// Nosso "banco de dados" em memória
+// banco de dados na memória
 let events = [];
 
-// Rota para listar eventos (ordenados por data e hora)
+// aqui fica a rota para listar eventos, que são ordenados por data e hora
 app.get('/api/events', (req, res) => {
   const sortedEvents = [...events].sort((a, b) => {
     const dateA = new Date(`${a.date}T${a.time}`);
@@ -22,11 +22,8 @@ app.get('/api/events', (req, res) => {
   res.json(sortedEvents);
 });
 
-// Rota para criar um novo evento
-// Substitua a rota app.post('/api/events') inteira por esta:
-
+// rota pra criar um novo evento
 app.post('/api/events', (req, res) => {
-  // Agora desestruturamos a 'description' também
   const { title, date, time, description } = req.body;
 
   if (!title || !date || !time) {
@@ -38,38 +35,36 @@ app.post('/api/events', (req, res) => {
     title,
     date,
     time,
-    description: description || '' // Salva a descrição (ou vazio se não tiver)
+    description: description || '' // aqui salva a descrição ou deixa vazio se não tiver
   };
 
   events.push(newEvent);
   res.status(201).json(newEvent);
 });
 
-// ... (código anterior: app.get e app.post continuam iguais)
-
-// Rota para DELETAR um evento
+// aquiu fica a rota para deletar um evento
 app.delete('/api/events/:id', (req, res) => {
-  const { id } = req.params; // Pega o ID que vem na URL
+  const { id } = req.params; // aqui pega o ID que vem na URL
   
-  // Filtra a lista, mantendo apenas os eventos que NÃO têm esse ID
+  // aqui filtra a lista, mantendo apenas os eventos que NÃO têm esse ID
   events = events.filter(event => event.id !== id);
   
   res.status(200).json({ message: 'Evento deletado com sucesso' });
 });
 
-// Rota para EDITAR (Atualizar) um evento
+// aqui fica a rota para editar um evento
 app.put('/api/events/:id', (req, res) => {
   const { id } = req.params;
   const { title, date, time, description } = req.body;
 
-  // Procura o evento pelo ID
+  // aqui procura o evento pelo ID
   const eventIndex = events.findIndex(event => event.id === id);
 
   if (eventIndex === -1) {
     return res.status(404).json({ error: 'Evento não encontrado' });
   }
 
-  // Atualiza os dados do evento na memória
+  // aqui então atualiza os dados do evento na memória
   events[eventIndex] = {
     ...events[eventIndex], // Mantém o ID original
     title,
@@ -81,8 +76,6 @@ app.put('/api/events/:id', (req, res) => {
   res.json(events[eventIndex]);
 });
 
-// app.listen(PORT, ...
-
 app.listen(PORT, () => {
-  console.log(`Servidor backend rodando em http://localhost:${PORT}`);
+  console.log(`Servidor backend tá rodandooooo em http://localhost:${PORT}`);
 });

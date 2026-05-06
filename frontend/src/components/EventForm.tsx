@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../styles/EventForm.css'; // Importação do arquivo de estilos separado
+import '../styles/EventForm.css';
 
 interface EventFormProps {
   onAddEvent: (title: string, date: string, time: string, description: string) => void;
@@ -15,10 +15,10 @@ export const EventForm: React.FC<EventFormProps> = ({ onAddEvent }) => {
     e.preventDefault();
     if (!title || !date || !time) return;
 
-    // Dispara a função passando todos os dados, incluindo a descrição
+    {/* Dispara a função passando todos os dados, incluindo a descrição */}
     onAddEvent(title, date, time, description);
     
-    // Limpa o formulário após adicionar
+    {/* Limpa o formulário após adicionar */}
     setTitle('');
     setDate('');
     setTime('');

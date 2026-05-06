@@ -43,7 +43,7 @@ function App() {
     }
   };
 
-  // NOVA FUNÇÃO: Deletar
+  {/* aqui fica a função do delete */}
   const handleDeleteEvent = async (id: string) => {
     try {
       const response = await fetch(`${API_URL}/${id}`, {
@@ -55,7 +55,7 @@ function App() {
     }
   };
 
-  // NOVA FUNÇÃO: Editar
+  {/* aqui fica a função do edit */}
   const handleEditEvent = async (id: string, updatedEvent: Omit<AppEvent, 'id'>) => {
     try {
       const response = await fetch(`${API_URL}/${id}`, {

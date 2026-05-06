@@ -9,10 +9,10 @@ interface EventListProps {
 }
 
 export const EventList: React.FC<EventListProps> = ({ events, onDelete, onEdit }) => {
-  // Controle de qual evento está sendo editado no momento
+  {/* Controle de qual evento está sendo editado no momento */}
   const [editingId, setEditingId] = useState<string | null>(null);
   
-  // Estado temporário para os dados do formulário de edição
+  {/* Estado temporário para os dados do formulário de edição */}
   const [editData, setEditData] = useState({ title: '', date: '', time: '', description: '' });
 
   const startEditing = (event: AppEvent) => {
@@ -26,7 +26,7 @@ export const EventList: React.FC<EventListProps> = ({ events, onDelete, onEdit }
 
   const handleSave = (id: string) => {
     onEdit(id, editData);
-    setEditingId(null); // Sai do modo de edição
+    setEditingId(null); {/* Sai do modo de edição */}
   };
 
   if (events.length === 0) {
