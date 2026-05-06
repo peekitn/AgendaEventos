@@ -66,7 +66,7 @@ app.put('/api/events/:id', (req, res) => {
 
   // aqui então atualiza os dados do evento na memória
   events[eventIndex] = {
-    ...events[eventIndex], // Mantém o ID original
+    ...events[eventIndex], // Mantém o ID originall
     title,
     date,
     time,
