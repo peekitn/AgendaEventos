@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { EventForm } from './components/EventForm';
 import { EventList } from './components/EventList';
+import './App.css';
 
 export interface AppEvent {
   id: string;
@@ -69,7 +70,7 @@ function App() {
   };
 
   return (
-    <div style={{ maxWidth: '600px', margin: '0 auto', fontFamily: 'sans-serif' }}>
+    <div className='app-container'>
       <h1>Agenda de Eventos</h1>
       <EventForm onAddEvent={handleAddEvent} />
       {/* Passando as novas funções para a lista */}

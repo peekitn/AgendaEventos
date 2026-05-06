@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import type { AppEvent } from '../App';
+import "../styles/EventList.css";
 
 interface EventListProps {
   events: AppEvent[];
@@ -33,26 +34,29 @@ export const EventList: React.FC<EventListProps> = ({ events, onDelete, onEdit }
   }
 
   return (
-    <div>
+    <div className="event-list-container">
       <h3>Próximos Eventos</h3>
-      <ul style={{ listStyle: 'none', padding: 0 }}>
+      <ul className="event-list">
         {events.map((event) => (
-          <li key={event.id} style={{ padding: '15px', borderBottom: '1px solid #eee', marginBottom: '10px', backgroundColor: '#f9f9f9', borderRadius: '5px' }}>
+          <li key={event.id} className="event-item">
             
             {/* Se for o evento que estamos editando, mostra os inputs */}
             {editingId === event.id ? (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+              <div className="edit-form">
                 <input 
-                  type="text" value={editData.title} 
+                  type="text" 
+                  value={editData.title} 
                   onChange={(e) => setEditData({...editData, title: e.target.value})} 
                 />
-                <div style={{ display: 'flex', gap: '8px' }}>
+                <div className="edit-row">
                   <input 
-                    type="date" value={editData.date} 
+                    type="date" 
+                    value={editData.date} 
                     onChange={(e) => setEditData({...editData, date: e.target.value})} 
                   />
                   <input 
-                    type="time" value={editData.time} 
+                    type="time" 
+                    value={editData.time} 
                     onChange={(e) => setEditData({...editData, time: e.target.value})} 
                   />
                 </div>
@@ -61,24 +65,24 @@ export const EventList: React.FC<EventListProps> = ({ events, onDelete, onEdit }
                   onChange={(e) => setEditData({...editData, description: e.target.value})} 
                   rows={2} 
                 />
-                <div style={{ display: 'flex', gap: '10px', marginTop: '5px' }}>
-                  <button onClick={() => handleSave(event.id)} style={{ backgroundColor: 'green', color: 'white' }}>Salvar</button>
-                  <button onClick={cancelEditing}>Cancelar</button>
+                <div className="action-buttons">
+                  <button onClick={() => handleSave(event.id)} className="btn btn-save">Salvar</button>
+                  <button onClick={cancelEditing} className="btn btn-cancel">Cancelar</button>
                 </div>
               </div>
             ) : (
               // Se NÃO estiver editando, mostra a visualização normal
               <div>
-                <strong>{event.title}</strong> <br/>
-                <small style={{ color: '#666' }}>Data: {event.date} | Hora: {event.time}</small>
+                <strong>{event.title}</strong>
+                <small className="event-meta">Data: {event.date} | Hora: {event.time}</small>
                 
                 {event.description && (
-                  <p style={{ margin: '10px 0', fontSize: '14px' }}>{event.description}</p>
+                  <p className="event-description">{event.description}</p>
                 )}
                 
-                <div style={{ display: 'flex', gap: '10px', marginTop: '10px' }}>
-                  <button onClick={() => startEditing(event)}>Editar</button>
-                  <button onClick={() => onDelete(event.id)} style={{ backgroundColor: 'red', color: 'white' }}>Deletar</button>
+                <div className="action-buttons">
+                  <button onClick={() => startEditing(event)} className="btn btn-edit">Editar</button>
+                  <button onClick={() => onDelete(event.id)} className="btn btn-delete">Deletar</button>
                 </div>
               </div>
             )}
